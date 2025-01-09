@@ -21,7 +21,7 @@ const App = () => {
   const fetchProjects = async () => {
     try {
       const response = await axios.get('https://raw.githubusercontent.com/saaslabsco/frontend-assignment/refs/heads/master/frontend-assignment.json');
-      setProjects(JSON.parse(JSON.stringify(response.data)));
+      setProjects(JSON.parse(JSON.stringify(response?.data)));
     } catch (error) {
       console.error('Error fetching data:', error);
     }
