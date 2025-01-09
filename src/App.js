@@ -40,23 +40,33 @@ const App = () => {
   const totalPages = Math.ceil(projects.length / recordsPerPage);
 
   return (
-    <Box sx={{ maxWidth: 800, margin: 'auto', padding: 4 }}>
+    <Box
+      sx={{ maxWidth: 800, margin: 'auto', padding: 4 }}
+      role="main"
+      aria-label="Kickstarter Projects Table"
+    >
       <Typography variant="h4" gutterBottom>
-        Kickstarter Project
+        Kickstarter Projects
       </Typography>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} role="table" aria-label="Projects Data">
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align="center">S.No.</TableCell>
-              <TableCell align="center">Percentage Funded</TableCell>
-              <TableCell align="center">Amount Pledged</TableCell>
+              <TableCell align="center" scope="col">
+                S.No.
+              </TableCell>
+              <TableCell align="center" scope="col">
+                Percentage Funded
+              </TableCell>
+              <TableCell align="center" scope="col">
+                Amount Pledged
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {displayProjects().map((project, index) => (
               <TableRow key={index}>
-                <TableCell align="center">
+                <TableCell align="center" scope="row">
                   {project["s.no"]}
                 </TableCell>
                 <TableCell align="center">
@@ -70,21 +80,32 @@ const App = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 2 }}>
+      <Box
+        sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 2 }}
+        role="navigation"
+        aria-label="Pagination Controls"
+      >
         <Button
           variant="contained"
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
+          aria-label="Go to Previous Page"
+          aria-disabled={currentPage === 1}
         >
           Previous
         </Button>
-        <Typography>
+        <Typography
+          aria-live="polite"
+          aria-atomic="true"
+        >
           Page {currentPage} of {totalPages}
         </Typography>
         <Button
           variant="contained"
           onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
           disabled={currentPage === totalPages}
+          aria-label="Go to Next Page"
+          aria-disabled={currentPage === totalPages}
         >
           Next
         </Button>
